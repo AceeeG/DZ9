@@ -2,7 +2,7 @@
 {
     internal interface ICipher
     {
-        string Encode(string text);
-        string Decode(string text);
+        string Encode();
+        string Decode();
     }
 }

@@ -14,12 +14,13 @@ namespace Lab
             Console.WriteLine("Упражнение 1\nВведите текст\n");
             string text = Console.ReadLine();
             ACipher acipher_text = new ACipher(text);
-            BCipher bcipher_text = new BCipher(text);
-            Console.WriteLine($"Зашифрованный текст: { acipher_text.Encode(acipher_text.Text)}\n" +
-                $"Расшифруем: {acipher_text.Decode(acipher_text.Result)}\n" +
+            string text2 = Console.ReadLine();
+            BCipher bcipher_text = new BCipher(text2);
+            Console.WriteLine($"Зашифрованный текст: { acipher_text.Encode()}\n" +
+                $"Расшифруем: {acipher_text.Decode()}\n" +
                 $"Теперь второй способ\n" +
-                $"Зашифрованный текст: {bcipher_text.Encode(bcipher_text.Text)}\n" +
-                $"Расшифруем: {bcipher_text.Decode(bcipher_text.Result)}\n");  
+                $"Зашифрованный текст: {bcipher_text.Encode()}\n" +
+                $"Расшифруем: {bcipher_text.Decode()}\n");  
         }
 
         static void DoHomeWork1()
@@ -39,7 +40,7 @@ namespace Lab
         }
         static void Main(string[] args)
         {
-            Console.WriteLine("Лабороторная работа 10\n");
+            Console.WriteLine("Лабораторная работа 10\n");
             DoExercise1();
             DoHomeWork1();
             Console.ReadKey();

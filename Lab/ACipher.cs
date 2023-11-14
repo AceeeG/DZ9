@@ -32,7 +32,7 @@
             this.text = text;
         }
 
-        public string Encode(string text)
+        public string Encode()
         {
             char[] text_array = text.ToCharArray();
 
@@ -55,9 +55,9 @@
             result = new string(text_array);
             return new string(text_array);
         }
-        public string Decode(string text)
+        public string Decode()
         {
-            char[] text_array = text.ToCharArray();
+            char[] text_array = result.ToCharArray();
 
             for (int i = 0; i < text_array.Length; i++)
             {

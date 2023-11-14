@@ -1,4 +1,6 @@
-﻿namespace Lab
+﻿using System;
+
+namespace Lab
 {
     internal class BCipher : ICipher
     {
@@ -32,58 +34,86 @@
             this.text = text;
         }
 
-        public string Encode(string text)
+        public string Encode()
         {
-            char[] text_array = text.ToCharArray();
-
-            for (int i = 0; i < text_array.Length; i++)
+            if (result == "" && text != "")
             {
-
-                if (char.IsLetter(text_array[i]))
+                for (int i = 0; i < text.Length; i++)
                 {
-                    if (char.IsLetter(text_array[i]) && text_array[i] != 'z' && text_array[i] != 'z')
+                    char new_char;
+
+                    if (Char.IsLetter(text[i]))
                     {
-                        char base_char = text_array[i];
-                        text_array[i] = (char)(base_char - 25 + (text_array[i] + base_char));
+                        if (text.ToLower()[i] >= 'а' && text.ToLower()[i] <= 'я')
+                        {
+                            new_char = (char)((int)'я' - ((int)text.ToLower()[i] - (int)'а'));
+                        }
+                        else
+                        {
+                            new_char = (char)((int)'z' - ((int)text.ToLower()[i] - (int)'a'));
+                        }
+
+                        if (Char.IsUpper(text[i]))
+                        {
+                            result += new_char.ToString().ToUpper();
+                        }
+                        else
+                        {
+                            result += new_char;
+                        }
                     }
-                    else if (text_array[i] == 'z')
+                    else
                     {
-                        text_array[i] = 'a';
-                    }
-                    else if (text_array[i] == 'я')
-                    {
-                        text_array[i] = 'а';
+                        result += text[i];
                     }
                 }
+                text = "";
+                return result;
             }
-            result = new string(text_array);
-            return new string(text_array);
-        }
-        public string Decode(string text)
-        {
-            char[] text_array = text.ToCharArray();
 
-            for (int i = 0; i < text_array.Length; i++)
+            return result;
+        }
+
+        public string Decode()
+        {
+            if (result != "" && text == "")
             {
-                if (char.IsLetter(text_array[i]))
+                for (int i = 0; i < result.Length; i++)
                 {
-                    if (char.IsLetter(text_array[i]) && text_array[i] != 'z' && text_array[i] != 'z')
+                    char new_char;
+
+                    if (Char.IsLetter(result[i]))
                     {
-                        char base_char = text_array[i];
-                        text_array[i] = (char)(base_char - 25 + (text_array[i] + base_char));
+                        if (result.ToLower()[i] >= 'а' && result.ToLower()[i] <= 'я')
+                        {
+                            new_char = (char)((int)'я' - (int)result.ToLower()[i] + (int)'а');
+                        }
+                        else
+                        {
+                            new_char = (char)(((int)'z' - (int)result.ToLower()[i]) + (int)'a');
+                        }
+
+                        if (Char.IsUpper(result[i]))
+                        {
+                            text += new_char.ToString().ToUpper();
+                        }
+                        else
+                        {
+                            text += new_char;
+                        }
                     }
-                    else if (text_array[i] == 'z')
+                    else
                     {
-                        text_array[i] = 'a';
-                    }
-                    else if (text_array[i] == 'я')
-                    {
-                        text_array[i] = 'а';
+                        text += text[i];
                     }
                 }
+
+                result = "";
+                return text;
             }
-            result = new string(text_array);
-            return new string(text_array);
+
+            return text;
         }
+
     }
 }
